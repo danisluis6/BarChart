@@ -33,7 +33,6 @@ public class BarChart extends FrameLayout {
     private boolean isBarAdded = false;
     private boolean isShowBarValue = true;
     private boolean isShowAnimation = true;
-    private OnBarClickListener onBarClickListener;
 
     private List<BarChartModel> barChartModels = new ArrayList<>();
 
@@ -48,12 +47,10 @@ public class BarChart extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BarChart, 0, 0);
         barType = a.getInt(R.styleable.BarChart_bar_type, BarChartUtils.BAR_CHART_VERTICAL);
 
-        barDimension = a.getDimensionPixelSize(R.styleable.BarChart_bar_width,
-                (int) BarChartUtils.convertDpToPixel(20, context));
+        barDimension = a.getDimensionPixelSize(R.styleable.BarChart_bar_width, (int) BarChartUtils.convertDpToPixel(20, context));
         barColor = a.getColor(R.styleable.BarChart_bar_color, BarChartUtils.BAR_CHART_COLOR_DEFAULT);
 
-        barTextSize = a.getDimensionPixelSize(R.styleable.BarChart_bar_text_size,
-                (int) BarChartUtils.convertDpToPixel(13, context));
+        barTextSize = a.getDimensionPixelSize(R.styleable.BarChart_bar_text_size, (int) BarChartUtils.convertDpToPixel(13, context));
 
         barTextSize = (int) BarChartUtils.convertPixelsToDp(barTextSize, context);
 
@@ -63,8 +60,7 @@ public class BarChart extends FrameLayout {
 
         barMaxValue = a.getInt(R.styleable.BarChart_bar_max_value, 0);
 
-        barSpaces = a.getDimensionPixelSize(R.styleable.BarChart_bar_spaces,
-                (int) BarChartUtils.convertDpToPixel(BarChartUtils.BAR_CHART_SPACE, context));
+        barSpaces = a.getDimensionPixelSize(R.styleable.BarChart_bar_spaces, (int) BarChartUtils.convertDpToPixel(BarChartUtils.BAR_CHART_SPACE, context));
 
         isShowBarValue = a.getBoolean(R.styleable.BarChart_bar_show_value, true);
         isShowAnimation = a.getBoolean(R.styleable.BarChart_bar_show_animation, true);
@@ -86,8 +82,7 @@ public class BarChart extends FrameLayout {
     private void initHorizontalChart() {
         horizontalLinearParent = new LinearLayout(context);
         horizontalLinearParent.setOrientation(LinearLayout.VERTICAL);
-        horizontalLinearParent.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        horizontalLinearParent.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         horizontalLinearParent.setGravity(Gravity.LEFT | Gravity.START);
         if (isShowAnimation) {
             horizontalLinearParent.setLayoutTransition(new LayoutTransition());
@@ -98,8 +93,7 @@ public class BarChart extends FrameLayout {
     private void initVerticalChart() {
         verticalLinearParent = new LinearLayout(context);
         verticalLinearParent.setOrientation(LinearLayout.HORIZONTAL);
-        verticalLinearParent.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        verticalLinearParent.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         verticalLinearParent.setGravity(Gravity.BOTTOM);
         if (isShowAnimation) {
             verticalLinearParent.setLayoutTransition(new LayoutTransition());
@@ -124,9 +118,7 @@ public class BarChart extends FrameLayout {
         updateUi(position, dimension, null, barChartModel, view);
     }
 
-    private void updateUi(int position, int dimension, BarChartModel barChartModelInit,
-                          final BarChartModel barChartModel,
-                          View view) {
+    private void updateUi(int position, int dimension, BarChartModel barChartModelInit, final BarChartModel barChartModel, View view) {
         if (barChartModel.getBarColor() != 0) {
             view.findViewById(R.id.linear_bar).setBackgroundColor(barChartModel.getBarColor());
         } else if (showAutoColorBar) {
@@ -141,11 +133,10 @@ public class BarChart extends FrameLayout {
 
         if (isShowBarValue) {
             TextView textView = view.findViewById(R.id.tv_bar);
-            if(barChartModel.getBarText()!=null){
+            if (barChartModel.getBarText() != null) {
                 textView.setText(String.format(Locale.getDefault(), "%s", barChartModel.getBarText()));
 
-            }
-            else {
+            } else {
                 textView.setText(String.format(Locale.getDefault(), "%d", barChartModel.getBarValue()));
             }
             textView.setTextSize(barTextSize);
@@ -156,8 +147,7 @@ public class BarChart extends FrameLayout {
 
 
         final LinearLayout linearLayoutBar = view.findViewById(R.id.linear_bar);
-        ValueAnimator anim = ValueAnimator.ofInt(barChartModelInit == null ?
-                0 : dimension * barChartModelInit.getBarValue() / barMaxValue, dimensionBar);
+        ValueAnimator anim = ValueAnimator.ofInt(barChartModelInit == null ? 0 : dimension * barChartModelInit.getBarValue() / barMaxValue, dimensionBar);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -178,14 +168,6 @@ public class BarChart extends FrameLayout {
             anim.setDuration(0);
         }
         anim.start();
-        view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onBarClickListener != null) {
-                    onBarClickListener.onBarClick(barChartModel);
-                }
-            }
-        });
         view.setTag(barChartModel);
         if (barType == BarChartUtils.BAR_CHART_VERTICAL) {
             view.getLayoutParams().width = barDimension;
@@ -217,31 +199,10 @@ public class BarChart extends FrameLayout {
         isBarAdded = true;
     }
 
-    private void updateHorizontalChart(int dimension, BarChartModel barChartModelInit,
-                                       final BarChartModel barChartModel) {
-        View view = horizontalLinearParent.findViewWithTag(barChartModelInit);
-        updateUi(-1, dimension, barChartModelInit, barChartModel, view);
-    }
-
-    private void updateVerticalChart(int dimension, BarChartModel barChartModelInit, final BarChartModel barChartModel) {
-        View view = verticalLinearParent.findViewWithTag(barChartModelInit);
-        updateUi(-1, dimension, barChartModelInit, barChartModel, view);
-    }
-
-    private void removeBarInternal(BarChartModel barChartModel) {
-        if (barType == BarChartUtils.BAR_CHART_HORIZONTAL) {
-            horizontalLinearParent.removeView(horizontalLinearParent.findViewWithTag(barChartModel));
-        } else {
-            verticalLinearParent.removeView(verticalLinearParent.findViewWithTag(barChartModel));
-
-        }
-    }
-
     private void getDimension(final boolean isHeightRequested, final View view, final DimensionReceivedCallback listener) {
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                System.out.println("Got the dimesion request onGlobalLayout");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 } else {
@@ -255,11 +216,6 @@ public class BarChart extends FrameLayout {
                 }
             }
         });
-    }
-
-
-    public void setOnBarClickListener(OnBarClickListener onBarClickListener) {
-        this.onBarClickListener = onBarClickListener;
     }
 
     public void addBar(final BarChartModel barChartModel) {
@@ -300,69 +256,7 @@ public class BarChart extends FrameLayout {
         }
     }
 
-    public void updateBar(final int index, final BarChartModel barChartModel) {
-        if (index >= barChartModels.size() || barChartModel == null) {
-            return;
-        }
-        final BarChartModel barChartModelInit = barChartModels.get(index);
-        barChartModels.set(index, barChartModel);
-
-        if (barType == BarChartUtils.BAR_CHART_HORIZONTAL) {
-            if (horizontalLinearParent.getHeight() == 0) {
-                getDimension(false, horizontalLinearParent, new DimensionReceivedCallback() {
-                    @Override
-                    public void onDimensionReceived(int dimension) {
-                        updateHorizontalChart(dimension, barChartModelInit, barChartModel);
-                    }
-                });
-            } else {
-                updateHorizontalChart(horizontalLinearParent.getWidth(), barChartModelInit, barChartModel);
-            }
-        } else {
-
-            if (verticalLinearParent.getHeight() == 0) {
-                getDimension(true, verticalLinearParent, new DimensionReceivedCallback() {
-                    @Override
-                    public void onDimensionReceived(int dimension) {
-                        updateVerticalChart(dimension, barChartModelInit, barChartModel);
-                    }
-                });
-            } else {
-                updateVerticalChart(verticalLinearParent.getHeight(), barChartModelInit, barChartModel);
-            }
-        }
-
-    }
-
-    public void removeBar(BarChartModel barChartModel) {
-        barChartModels.remove(barChartModel);
-        removeBarInternal(barChartModel);
-    }
-
-    public void removeBar(int index) {
-        if (index < barChartModels.size()) {
-            BarChartModel barChartModel = barChartModels.remove(index);
-            removeBarInternal(barChartModel);
-        }
-
-    }
-
-    public void clearAll() {
-        barChartModels.clear();
-        if (verticalLinearParent != null) {
-            verticalLinearParent.removeAllViews();
-        }
-        if (horizontalLinearParent != null) {
-            horizontalLinearParent.removeAllViews();
-        }
-    }
-
-
     private interface DimensionReceivedCallback {
         void onDimensionReceived(int dimension);
-    }
-
-    public interface OnBarClickListener {
-        void onBarClick(BarChartModel barChartModel);
     }
 }

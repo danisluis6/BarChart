@@ -5,12 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="it.lorence.example.MainActivity">
-
-    <HorizontalScrollView
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <it.lorence.barchart.BarChart
         android:id="@+id/bar_chart_vertical"
@@ -21,12 +17,10 @@
         barchart:bar_text_size="10sp"
         barchart:bar_show_auto_color="false"
         barchart:bar_max_value="100"
-        barchart:bar_spaces = "0dp"
+        barchart:bar_spaces = "20dp"
         barchart:bar_show_value="true"
         barchart:bar_show_animation="true"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
-
-    </HorizontalScrollView>
 
 </LinearLayout>
