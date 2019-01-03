@@ -10,41 +10,56 @@ import it.lorence.barchart.BarChart;
 import it.lorence.barchart.BarChartModel;
 
 public class MainActivity extends AppCompatActivity {
-    private BarChart barChartVertical;
+
+    private BarChart colAnswerA, colAnswerB, colAnswerC, colAnswerD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        barChartVertical = (BarChart) findViewById(R.id.bar_chart_vertical);
-        for (int i = 0; i < 3; i++) {
-            BarChartModel barChartModel = new BarChartModel();
-            barChartModel.setBarValue(new Random().nextInt(100));
-            Random rnd = new Random();
-            barChartModel.setBarColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
-            barChartModel.setBarTag(null);
-        }
-        String data[] = new String[] {
-                "Java",
-                "Python",
-                "JavaScript",
-                "C"
-        };
+        colAnswerA = (BarChart) findViewById(R.id.answera);
+        colAnswerB = (BarChart) findViewById(R.id.answerb);
+        colAnswerC = (BarChart) findViewById(R.id.answerc);
+        colAnswerD = (BarChart) findViewById(R.id.answerd);
 
-        int dataColor[] = new int[] {
-                Color.parseColor("#00BCD4"),
-                Color.parseColor("#3F51B5"),
-                Color.parseColor("#2196F3"),
-                Color.parseColor("#FF9800")
-        };
-
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             BarChartModel barChartModel = new BarChartModel();
             barChartModel.setBarValue(new Random().nextInt(100));
             Random rnd = new Random();
             barChartModel.setBarColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
             barChartModel.setBarTag(null);
             barChartModel.setBarText("Hello World");
-            barChartVertical.addBar(barChartModel);
+            colAnswerA.addBar(barChartModel);
+        }
+
+        for (int i = 0; i < 1; i++) {
+            BarChartModel barChartModel = new BarChartModel();
+            barChartModel.setBarValue(new Random().nextInt(100));
+            Random rnd = new Random();
+            barChartModel.setBarColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+            barChartModel.setBarTag(null);
+            barChartModel.setBarText("Hello World");
+            colAnswerB.addBar(barChartModel);
+        }
+
+        for (int i = 0; i < 1; i++) {
+            BarChartModel barChartModel = new BarChartModel();
+            barChartModel.setBarValue(new Random().nextInt(100));
+            Random rnd = new Random();
+            barChartModel.setBarColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+            barChartModel.setBarTag(null);
+            barChartModel.setBarText("Hello World");
+            colAnswerC.addBar(barChartModel);
+        }
+
+        for (int i = 0; i < 1; i++) {
+            BarChartModel barChartModel = new BarChartModel();
+            barChartModel.setBarValue(new Random().nextInt(100));
+            Random rnd = new Random();
+            barChartModel.setBarColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+            barChartModel.setBarTag(null);
+            barChartModel.setBarText("Hello World");
+            colAnswerD.addBar(barChartModel);
         }
 
     }

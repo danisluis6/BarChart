@@ -4,23 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="horizontal"
     tools:context="it.lorence.example.MainActivity">
 
-    <it.lorence.barchart.BarChart
-        android:id="@+id/bar_chart_vertical"
-        barchart:bar_type="vertical"
-        barchart:bar_width="60dp"
-        barchart:bar_color="@color/colorPrimary"
-        barchart:bar_text_color="#808080"
-        barchart:bar_text_size="10sp"
-        barchart:bar_show_auto_color="false"
-        barchart:bar_max_value="100"
-        barchart:bar_spaces = "20dp"
-        barchart:bar_show_value="true"
-        barchart:bar_show_animation="true"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <it.lorence.barchart.BarChart
+            android:id="@+id/answera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            barchart:bar_color="@color/colorPrimary"
+            barchart:bar_max_value="100"
+            barchart:bar_show_animation="true"
+            barchart:bar_show_auto_color="false"
+            barchart:bar_show_value="true"
+            barchart:bar_spaces="20dp"
+            barchart:bar_text_color="#808080"
+            barchart:bar_text_size="10sp"
+            barchart:bar_type="vertical"
+            barchart:bar_width="60dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <it.lorence.barchart.BarChart
+            android:id="@+id/answerb"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            barchart:bar_color="@color/colorPrimary"
+            barchart:bar_max_value="100"
+            barchart:bar_show_animation="true"
+            barchart:bar_show_auto_color="false"
+            barchart:bar_show_value="true"
+            barchart:bar_spaces="20dp"
+            barchart:bar_text_color="#808080"
+            barchart:bar_text_size="10sp"
+            barchart:bar_type="vertical"
+            barchart:bar_width="60dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <it.lorence.barchart.BarChart
+            android:id="@+id/answerc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            barchart:bar_color="@color/colorPrimary"
+            barchart:bar_max_value="100"
+            barchart:bar_show_animation="true"
+            barchart:bar_show_auto_color="false"
+            barchart:bar_show_value="true"
+            barchart:bar_spaces="20dp"
+            barchart:bar_text_color="#808080"
+            barchart:bar_text_size="10sp"
+            barchart:bar_type="vertical"
+            barchart:bar_width="60dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <it.lorence.barchart.BarChart
+            android:id="@+id/answerd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            barchart:bar_color="@color/colorPrimary"
+            barchart:bar_max_value="100"
+            barchart:bar_show_animation="true"
+            barchart:bar_show_auto_color="false"
+            barchart:bar_show_value="true"
+            barchart:bar_spaces="20dp"
+            barchart:bar_text_color="#808080"
+            barchart:bar_text_size="10sp"
+            barchart:bar_type="vertical"
+            barchart:bar_width="60dp" />
+    </LinearLayout>
 
 </LinearLayout>
